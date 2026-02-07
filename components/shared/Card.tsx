@@ -1,14 +1,17 @@
 interface CardProps {
   title: string;
   value: string;
-  // FIX: Changed JSX.Element to React.ReactNode to fix "Cannot find namespace 'JSX'" error.
   icon: React.ReactNode;
   change?: string;
-  changeType?: 'increase' | 'decrease';
+  changeType?: 'increase' | 'decrease' | 'neutral';
 }
 
 const Card: React.FC<CardProps> = ({ title, value, icon, change, changeType }) => {
-  const changeColor = changeType === 'increase' ? 'text-green-600' : 'text-red-600';
+  const changeColor = changeType === 'increase'
+    ? 'text-green-600'
+    : changeType === 'decrease'
+      ? 'text-red-600'
+      : 'text-clarte-gray-500';
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm">
@@ -23,8 +26,7 @@ const Card: React.FC<CardProps> = ({ title, value, icon, change, changeType }) =
       </div>
       {change && (
         <div className="mt-4 flex items-center text-sm">
-          <span className={`${changeColor} font-semibold`}>{change}</span>
-          <span className="ml-1 text-clarte-gray-500">from last month</span>
+          <span className={`${changeColor} font-medium`}>{change}</span>
         </div>
       )}
     </div>

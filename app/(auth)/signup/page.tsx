@@ -117,7 +117,11 @@ export default function SignupPage() {
             <p className="text-xs text-clarte-gray-400 mt-1">Minimum 6 characters</p>
           </div>
 
-          <Button type="submit" className="w-full bg-clarte-orange hover:bg-clarte-orange/90" disabled={loading}>
+          <Button
+            type="submit"
+            className="w-full bg-clarte-orange hover:bg-clarte-orange/90 text-white font-semibold py-3"
+            disabled={loading}
+          >
             {loading ? 'Creating account...' : 'Create account'}
           </Button>
         </form>
