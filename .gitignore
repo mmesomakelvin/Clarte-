@@ -2,6 +2,11 @@
 node_modules
 .pnpm-store
 
+# Local files (not for repo)
+.claude/
+Clarte_Project_Guide.pdf
+clarte---dental-billing-dashboard.zip
+
 # Next.js
 .next
 out
