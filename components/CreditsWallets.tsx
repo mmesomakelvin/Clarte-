@@ -1,5 +1,6 @@
+'use client'
 
-import React, { useState } from 'react';
+import { useState } from 'react'
 import Table from './shared/Table';
 import Tabs from './shared/Tabs';
 import { mockCredits, mockWallets } from '../data/mockData';

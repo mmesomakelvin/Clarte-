@@ -1,7 +1,10 @@
+interface SettingsCardProps {
+  title: string
+  description: string
+  children: React.ReactNode
+}
 
-import React from 'react';
-
-const SettingsCard: React.FC<{ title: string; description: string; children: React.ReactNode }> = ({ title, description, children }) => (
+const SettingsCard = ({ title, description, children }: SettingsCardProps) => (
   <div className="bg-white shadow-sm rounded-lg">
     <div className="px-4 py-5 sm:p-6">
       <h3 className="text-lg leading-6 font-medium text-clarte-gray-900">{title}</h3>

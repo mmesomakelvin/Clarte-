@@ -1,25 +1,21 @@
+'use client'
 
-import React from 'react';
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
-type View = 'dashboard' | 'claims' | 'ar' | 'credits' | 'settings';
-
-interface SidebarProps {
-  activeView: View;
-  setActiveView: (view: View) => void;
+interface NavItemProps {
+  href: string
+  icon: React.ReactNode
+  label: string
 }
 
-const NavItem: React.FC<{
-  view: View;
-  activeView: View;
-  setActiveView: (view: View) => void;
-  // FIX: Changed JSX.Element to React.ReactNode to fix "Cannot find namespace 'JSX'" error.
-  icon: React.ReactNode;
-  label: string;
-}> = ({ view, activeView, setActiveView, icon, label }) => {
-  const isActive = activeView === view;
+const NavItem: React.FC<NavItemProps> = ({ href, icon, label }) => {
+  const pathname = usePathname()
+  const isActive = pathname === href || (href !== '/' && pathname.startsWith(href))
+
   return (
-    <button
-      onClick={() => setActiveView(view)}
+    <Link
+      href={href}
       className={`flex items-center w-full px-4 py-3 text-sm font-medium transition-colors duration-200 rounded-lg ${
         isActive
           ? 'bg-clarte-orange-500 text-white'
@@ -28,11 +24,11 @@ const NavItem: React.FC<{
     >
       <span className="w-6 h-6 mr-3">{icon}</span>
       {label}
-    </button>
-  );
-};
+    </Link>
+  )
+}
 
-const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView }) => {
+const Sidebar: React.FC = () => {
   return (
     <aside className="w-64 bg-white border-r border-clarte-gray-200 flex flex-col p-4">
       <div className="flex items-center mb-8">
@@ -40,9 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView }) => {
       </div>
       <nav className="flex-1 space-y-2">
         <NavItem
-          view="dashboard"
-          activeView={activeView}
-          setActiveView={setActiveView}
+          href="/"
           label="Dashboard"
           icon={
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -51,9 +45,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView }) => {
           }
         />
         <NavItem
-          view="claims"
-          activeView={activeView}
-          setActiveView={setActiveView}
+          href="/claims"
           label="Claims"
           icon={
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -62,9 +54,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView }) => {
           }
         />
         <NavItem
-          view="ar"
-          activeView={activeView}
-          setActiveView={setActiveView}
+          href="/ar"
           label="Accounts Receivable"
           icon={
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -73,9 +63,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView }) => {
           }
         />
         <NavItem
-          view="credits"
-          activeView={activeView}
-          setActiveView={setActiveView}
+          href="/credits"
           label="Credits & Wallets"
           icon={
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -86,9 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView }) => {
       </nav>
       <div className="mt-auto">
         <NavItem
-          view="settings"
-          activeView={activeView}
-          setActiveView={setActiveView}
+          href="/settings"
           label="Settings"
           icon={
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -99,7 +85,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView }) => {
         />
       </div>
     </aside>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

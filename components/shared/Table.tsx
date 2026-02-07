@@ -1,6 +1,3 @@
-
-import React from 'react';
-
 interface Column<T> {
   // FIX: Changed header type from string to React.ReactNode to allow JSX in headers.
   header: React.ReactNode;

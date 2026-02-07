@@ -1,5 +1,6 @@
+'use client'
 
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react'
 import Table from './shared/Table';
 import Tabs from './shared/Tabs';
 import { mockARRecords } from '../data/mockData';
