@@ -16,6 +16,7 @@ const config: Config = {
   		},
   		colors: {
   			'clarte-orange': {
+  				DEFAULT: '#F97316',
   				'100': '#FFEDD5',
   				'500': '#F97316',
   				'600': '#EA580C'
