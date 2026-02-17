@@ -16,6 +16,21 @@ export async function getUserOffice() {
   return membership
 }
 
+// Get ALL offices the user belongs to
+export async function getUserOffices() {
+  const supabase = createClient()
+
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return []
+
+  const { data: memberships } = await supabase
+    .from('office_memberships')
+    .select('office_id, role, offices(id, name)')
+    .eq('user_id', user.id)
+
+  return memberships || []
+}
+
 // Get claims for the user's office
 export async function getClaims(officeId: string) {
   const supabase = createClient()

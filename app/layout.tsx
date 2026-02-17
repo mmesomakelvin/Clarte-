@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import CursorTrail from '@/components/CursorTrail'
 
 export const metadata: Metadata = {
   title: 'Clarte - Dental Billing Dashboard',
@@ -14,6 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
+        <CursorTrail />
         {children}
       </body>
     </html>

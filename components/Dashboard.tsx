@@ -43,7 +43,7 @@ const Dashboard: React.FC = () => {
       try {
         const membership = await getUserOffice()
         if (membership) {
-          setOfficeName((membership.offices as { name: string })?.name || 'My Office')
+          setOfficeName((membership.offices as unknown as { name: string })?.name || 'My Office')
           const dashboardStats = await getDashboardStats(membership.office_id)
           setStats(dashboardStats)
         }
