@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
@@ -11,7 +12,15 @@ export default function ForgotPasswordPage() {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
+  const searchParams = useSearchParams()
   const supabase = createClient()
+
+  useEffect(() => {
+    const urlError = searchParams.get('error')
+    if (urlError) {
+      setError(urlError)
+    }
+  }, [searchParams])
 
   const handleReset = async (e: React.FormEvent) => {
     e.preventDefault()
