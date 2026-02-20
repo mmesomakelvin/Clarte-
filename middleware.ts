@@ -32,7 +32,7 @@ export async function middleware(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   // Public routes that don't require auth
-  const publicRoutes = ['/login', '/signup', '/auth/callback']
+  const publicRoutes = ['/login', '/signup', '/auth/callback', '/forgot-password', '/reset-password']
   const isPublicRoute = publicRoutes.some(route => request.nextUrl.pathname.startsWith(route))
 
   // If not logged in and trying to access protected route, redirect to login
@@ -43,7 +43,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // If logged in and trying to access auth pages, redirect to home
-  if (user && (request.nextUrl.pathname === '/login' || request.nextUrl.pathname === '/signup')) {
+  if (user && !request.nextUrl.pathname.startsWith('/reset-password') && (request.nextUrl.pathname === '/login' || request.nextUrl.pathname === '/signup')) {
     const url = request.nextUrl.clone()
     url.pathname = '/'
     return NextResponse.redirect(url)
