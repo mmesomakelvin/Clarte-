@@ -35,14 +35,16 @@ A modern, multi-tenant web application for dental office billing management. Rep
   - `monthly_snapshots` - Historical metrics
   - `import_history` - CSV import audit trail
 - [x] **Authentication** - Login/signup pages with Supabase Auth
+- [x] **Password Recovery** - Forgot password / reset password flow via email
 - [x] **Route Protection** - Middleware redirects unauthenticated users
 - [x] **Dashboard** - Real data from Supabase (claims, AR, credits, wallets stats)
+- [x] **Accounts Receivable** - Real data from Supabase with aging buckets and filtering
 - [x] **User Profile** - Header shows logged-in user info with sign out
+- [x] **Multi-Office Selector** - Office switcher in header with cursor trail effect
 
 ### In Progress / Next Steps
-- [ ] **Claims Page** - Connect to real Supabase data
-- [ ] **AR Page** - Connect to real Supabase data
-- [ ] **Credits & Wallets Page** - Connect to real Supabase data
+- [ ] **Claims Page** - Connect to real Supabase data (currently mock)
+- [ ] **Credits & Wallets Page** - Connect to real Supabase data (currently mock)
 - [ ] **CSV Import** - Drag-and-drop file upload with validation
 - [ ] **Detail Panels** - Click row to see full details in slide-out panel
 - [ ] **Settings Page** - Carrier rules, auto-flagging configuration
@@ -92,7 +94,9 @@ Clarte-/
 │   ├── (auth)/                 # Auth pages (no sidebar)
 │   │   ├── login/page.tsx      # Login page
 │   │   ├── signup/page.tsx     # Signup page
-│   │   └── auth/callback/      # OAuth callback
+│   │   ├── forgot-password/    # Password reset request
+│   │   ├── reset-password/     # Set new password
+│   │   └── auth/callback/      # Auth callback (login, recovery)
 │   ├── (dashboard)/            # Dashboard pages (with sidebar)
 │   │   ├── page.tsx            # Dashboard (/)
 │   │   ├── claims/page.tsx     # Claims (/claims)
@@ -124,9 +128,13 @@ Clarte-/
 
 | Section | Route | Description | Status |
 |---------|-------|-------------|--------|
+| Login | `/login` | User authentication | Supabase Auth |
+| Signup | `/signup` | New user registration | Supabase Auth |
+| Forgot Password | `/forgot-password` | Request password reset email | Supabase Auth |
+| Reset Password | `/reset-password` | Set new password from email link | Supabase Auth |
 | Dashboard | `/` | KPIs, AR aging, trends | Connected to Supabase |
+| Accounts Receivable | `/ar` | Aging buckets, filtering, totals | Connected to Supabase |
 | Claims | `/claims` | Insurance claim tracking | Mock data |
-| Accounts Receivable | `/ar` | Patient balance aging | Mock data |
 | Credits & Wallets | `/credits` | Overpayments & prepaid | Mock data |
 | Settings | `/settings` | Configuration & admin | UI only |
 
